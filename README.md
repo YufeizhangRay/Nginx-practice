@@ -2,6 +2,39 @@
   
 ## Nginx学习实践  
   
+- [什么是Nginx](#什么是nginx)  
+- [Apache、Tomcat、Nginx的区别](#apache、tomcat、nginx的区别)  
+- [安装Nginx](#安装nginx)  
+- [Nginx配置](#nginx配置)  
+  - [虚拟主机配置](#虚拟主机配置)  
+  - [基于ip的虚拟主机](#基于ip的虚拟主机)  
+  - [基于端口号的虚拟主机](#基于端口号的虚拟主机)  
+  - [基于域名的虚拟主机](#基于域名的虚拟主机)  
+  - [location](#location)  
+- [Nginx模块](#nginx模块)  
+- [反向代理](#反向代理)  
+- [负载均衡](#负载均衡)  
+  - [其他功能配置](#其他功能配置)  
+- [Nginx动静分离](#nginx动静分离)  
+- [缓存](#缓存)    
+- [压缩](#压缩)  
+- [防盗链](#防盗链)
+- [跨域访问](#跨域访问)  
+- [Nginx进程模型简介](#nginx进程模型简介)  
+- [Nginx的高可用方案](#nginx的高可用方案)  
+  - [keepalived](#keepalived)  
+  - [轻量级的高可用解决方案](#轻量级的高可用解决方案)  
+- [高可用实践](#高可用实践)  
+  - [keepalived的配置](#keepalived的配置)  
+  - [keepalived日志文件配置](#keepalived日志文件配置)  
+  - [通过脚本实现动态切换](#通过脚本实现动态切换)  
+- [Openresty](#openresty)  
+- [网关](#网关)  
+  - [网关的概念](#网关的概念)  
+  - [为什么需要网关](#为什么需要网关)  
+- [OpenResty实现API网关限流及登录授权](#openResty实现api网关限流及登录授权)  
+  - [灰度发布的实现](#灰度发布的实现)  
+  
 ### 什么是Nginx  
   
 Nginx是一个高性能的反向代理服务器。  
@@ -15,18 +48,17 @@ Tomcat是可以解析jsp/servlet的动态web服务器。
   
 ### 安装Nginx  
 >1.下载tar包  
-2.tar -zxvf nginx.tar.gz  
-3. ./configure [--prefix]  
-4. make && make install  
+>2.tar -zxvf nginx.tar.gz  
+>3. ./configure [--prefix]  
+>4. make && make install  
   
-#### 启动和停止
+启动和停止
 >1. sbin/nginx  
 >2. sbin/nginx -s stop  
   
 ### Nginx配置  
   
-Nginx的配置文件为nginx.conf。 
-主要分为三个部分  
+Nginx的配置文件为nginx.conf。 主要分为三个部分  
 >Main           
 event  
 http  
@@ -507,7 +539,7 @@ linux2.4 以后，是内置在 linux 内核中的。
 8.cp /data/program/keepalived-2.0.7/keepalived/etc/init.d/keepalived /etc/init.d  
 9.chkconfig --add keepalived \10. chkconfig keepalived on \11. service keepalived start  
   
-#### keepalived 的配置  
+#### keepalived的配置  
 master  
 ```
 ! Configuration File for keepalived 
@@ -758,7 +790,7 @@ Backends for frontends
 所以通过 API 网关，可以对指定调用的微服务版本，通过版本来隔离。如下图所示  
 ![](https://github.com/YufeizhangRay/image/blob/master/Nginx/%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83.jpeg)  
   
-### OpenResty 实现 API 网关限流及登录授权  
+### OpenResty实现API网关限流及登录授权  
   
 #### OpenResty 为什么能做网关  
 前面我们了解到了网关的作用，通过网关，可以对 api 访问的前置操作进行统一的管理，比如鉴权、限流、负载均衡、日志收集、请求分片等。所以 API 网关的核心是所有客户端对接后端服务之前，都需要统一接入网关，通过网关层将所有非业务功能进行处理。  
