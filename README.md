@@ -3,7 +3,7 @@
 ## Nginx学习实践  
   
 - [什么是Nginx](#什么是nginx)  
-- [Apache、Tomcat、Nginx的区别](#apache、tomcat、nginx的区别)  
+- [Apache、Tomcat、Nginx的区别](#apachetomcatnginx的区别)  
 - [安装Nginx](#安装nginx)  
 - [Nginx配置](#nginx配置)  
   - [虚拟主机配置](#虚拟主机配置)  
