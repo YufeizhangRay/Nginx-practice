@@ -316,8 +316,8 @@ proxy_next_upstream
 语法:proxy_next_upstream [error | timeout | invalid_header | http_500 | http_502 | http_503 | http_504 | http_404 | off ];  
 默认:proxy_next_upstream error timeout;  
 配置块:http、server、location   
-这个配置表示当向一台上有服务器转发请求出现错误的时候，继续换一台上后服务器来处理这个请求。  
-默认情况下，上游服务器一旦开始发送响应数据，Nginx反向代理服务器会立刻把应答包转发给客户端。因此一旦Nginx开始向客户端发送响应包，如果中途出现错误也不允许切换到下一个上有服务器继续处理的。这样做的目的是保证客户端只收到来自同一个上游服务器的应答。  
+这个配置表示当向一台上有服务器转发请求出现错误的时候，继续换一台上游服务器来处理这个请求。  
+默认情况下，上游服务器一旦开始发送响应数据，Nginx反向代理服务器会立刻把应答包转发给客户端。因此一旦Nginx开始向客户端发送响应包，如果中途出现错误也不允许切换到下一个上游服务器继续处理的。这样做的目的是保证客户端只收到来自同一个上游服务器的应答。  
 
 proxy_connect_timeout  
 语法: proxy_connect_timeout time;  
@@ -329,9 +329,9 @@ proxy_send_timeout
 向后端写数据的超时时间，两次写操作的时间间隔如果大于这个值，也就是过了指定时间后端还没有收到数据，连接会被关闭。
   
 proxy_read_timeout  
-从后端读取数据的超时时间，两次读取操作的时间间隔如果大于这个值，那么nginx和后端的链接会被关闭，如果一个请求的处理时间比较长，可以把这个值设置得大一些。  
+从后端读取数据的超时时间，两次读取操作的时间间隔如果大于这个值，那么nginx和后端的链接会被关闭，如果一个请求的处理时间比较长，可以把这个值设置得大一些。   
 proxy_upstream_fail_timeout  
-设置了某一个upstream后端失败了指定次数(max_fails)后，在fail_timeout时间内不再去请求它，默认为10秒。  
+某一个upstream后端失败了指定次数(max_fails)后，在fail_timeout时间内不再去请求它，默认为10秒。  
 语法 server address [fail_timeout=30s]  
 ```
 upstream backend { #服务器集群名字
@@ -882,4 +882,6 @@ local ok,err=red:close();
 2. 启动 redis，并设置 set gray 192.168.11.160  
 3. 通过浏览器运行: http://192.168.11.160/api 查看运行结果  
 ```
-修改 redis gray 的值，将客户端的 ip 存储到 redis 中 set gray 1. 再次运行结果，即可看到访问结果已经发生了变化。
+修改 redis gray 的值，将客户端的 ip 存储到 redis 中 set gray 1. 再次运行结果，即可看到访问结果已经发生了变化。  
+  
+[返回顶部](#nginx-practice)
